@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>2026 Qingdao Workshop</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: Arial, "Noto Sans KR", sans-serif;
+      background: #f7f5ef;
+      color: #183b4e;
+      line-height: 1.6;
+    }
+
+    /* ---------- HERO ---------- */
+
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 40px 20px;
+      background:
+        linear-gradient(
+          180deg,
+          #b9e2ee 0%,
+          #dff1f4 55%,
+          #f7f5ef 100%
+        );
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      width: 500px;
+      height: 500px;
+      background: rgba(255,255,255,0.35);
+      border-radius: 50%;
+      top: -180px;
+      right: -150px;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: 700px;
+    }
+
+    .small-title {
+      font-size: 14px;
+      letter-spacing: 4px;
+      font-weight: bold;
+      margin-bottom: 25px;
+      opacity: 0.75;
+    }
+
+    .hero h1 {
+      font-size: clamp(58px, 13vw, 120px);
+      line-height: 0.9;
+      letter-spacing: -5px;
+      margin-bottom: 25px;
+      font-weight: 900;
+    }
+
+    .hero h2 {
+      font-size: clamp(18px, 4vw, 28px);
+      letter-spacing: 3px;
+      margin-bottom: 25px;
+    }
+
+    .date {
+      display: inline-block;
+      padding: 10px 20px;
+      border: 1px solid rgba(24,59,78,0.25);
+      border-radius: 30px;
+      font-size: 14px;
+      letter-spacing: 2px;
+      background: rgba(255,255,255,0.3);
+    }
+
+    .beer {
+      font-size: 55px;
+      margin-bottom: 10px;
+    }
+
+    .scroll {
+      margin-top: 60px;
+      font-size: 12px;
+      letter-spacing: 3px;
+      opacity: 0.6;
+    }
+
+    /* ---------- COMMON ---------- */
+
+    section {
+      padding: 90px 20px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      font-size: 12px;
+      letter-spacing: 3px;
+      font-weight: bold;
+      opacity: 0.55;
+      margin-bottom: 10px;
+    }
+
+    .section-title {
+      font-size: clamp(32px, 7vw, 54px);
+      line-height: 1.1;
+      margin-bottom: 35px;
+      letter-spacing: -2px;
+    }
+
+    /* ---------- INFO ---------- */
+
+    .info {
+      background: #f7f5ef;
+    }
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 15px;
+    }
+
+    .info-card {
+      background: white;
+      padding: 25px;
+      border-radius: 20px;
+      box-shadow: 0 8px 25px rgba(24,59,78,0.06);
+    }
+
+    .info-card .icon {
+      font-size: 28px;
+      margin-bottom: 10px;
+    }
+
+    .info-card h3 {
+      font-size: 14px;
+      margin-bottom: 5px;
+      opacity: 0.55;
+    }
+
+    .info-card p {
+      font-size: 18px;
+      font-weight: bold;
+    }
+
+    /* ---------- CREW ---------- */
+
+    .crew {
+      background: #eaf3f2;
+      max-width: none;
+    }
+
+    .crew-inner {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .crew-text {
+      margin-bottom: 30px;
+      color: #46636c;
+    }
+
+    .crew-list {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+    }
+
+    .crew-member {
+      background: white;
+      border-radius: 18px;
+      padding: 25px 10px;
+      text-align: center;
+      font-weight: bold;
+    }
+
+    .crew-member span {
+      display: block;
+      font-size: 28px;
+      margin-bottom: 5px;
+    }
+
+    /* ---------- ITINERARY ---------- */
+
+    .timeline {
+      border-left: 2px solid #9dcbd5;
+      margin-left: 10px;
+      padding-left: 25px;
+    }
+
+    .day {
+      margin-bottom: 50px;
+    }
+
+    .day-title {
+      font-size: 24px;
+      font-weight: 900;
+      margin-bottom: 20px;
+    }
+
+    .timeline-item {
+      position: relative;
+      margin-bottom: 22px;
+    }
+
+    .timeline-item::before {
+      content: "";
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #2d7d93;
+      left: -31px;
+      top: 8px;
+    }
+
+    .time {
+      font-size: 12px;
+      letter-spacing: 1px;
+      opacity: 0.55;
+      font-weight: bold;
+    }
+
+    .event {
+      font-size: 17px;
+      font-weight: bold;
+    }
+
+    /* ---------- FOOD ---------- */
+
+    .food {
+      background: #f2eadb;
+      max-width: none;
+    }
+
+    .food-inner {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .food-box {
+      background: rgba(255,255,255,0.7);
+      border-radius: 25px;
+      padding: 35px;
+      text-align: center;
+    }
+
+    .food-box .big-icon {
+      font-size: 55px;
+      margin-bottom: 10px;
+    }
+
+    .food-box h3 {
+      font-size: 26px;
+      margin-bottom: 10px;
+    }
+
+    /* ---------- CHECKLIST ---------- */
+
+    .checklist {
+      list-style: none;
+    }
+
+    .checklist li {
+      background: white;
+      margin-bottom: 10px;
+      padding: 16px 20px;
+      border-radius: 14px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.03);
+    }
+
+    /* ---------- FOOTER ---------- */
+
+    footer {
+      text-align: center;
+      padding: 70px 20px;
+      background: #183b4e;
+      color: white;
+    }
+
+    footer .footer-icon {
+      font-size: 45px;
+      margin-bottom: 15px;
+    }
+
+    footer h2 {
+      font-size: 28px;
+      margin-bottom: 10px;
+    }
+
+    footer p {
+      opacity: 0.65;
+      font-size: 13px;
+    }
+
+    /* ---------- MOBILE ---------- */
+
+    @media (max-width: 600px) {
+
+      .hero h1 {
+        letter-spacing: -3px;
+      }
+
+      section {
+        padding: 70px 20px;
+      }
+
+      .info-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .crew-list {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .food-box {
+        padding: 30px 20px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- HERO -->
+
+  <header class="hero">
+
+    <div class="hero-content">
+
+      <div class="beer">🍺</div>
+
+      <div class="small-title">
+        2026 COMPANY WORKSHOP
+      </div>
+
+      <h1>QINGDAO</h1>
+
+      <h2>WE'RE GOING TO CHINA</h2>
+
+      <div class="date">
+        2026.08.28 FRI — 08.30 SUN
+      </div>
+
+      <div class="scroll">
+        SCROLL TO EXPLORE ↓
+      </div>
+
+    </div>
+
+  </header>
+
+
+  <!-- INFO -->
+
+  <section class="info">
+
+    <div class="section-label">
+      01 / TRIP INFO
+    </div>
+
+    <h2 class="section-title">
+      Our little<br>
+      trip to Qingdao.
+    </h2>
+
+    <div class="info-grid">
+
+      <div class="info-card">
+        <div class="icon">📅</div>
+        <h3>DATE</h3>
+        <p>8.28 — 8.30</p>
+      </div>
+
+      <div class="info-card">
+        <div class="icon">📍</div>
+        <h3>DESTINATION</h3>
+        <p>Qingdao, China</p>
+      </div>
+
+      <div class="info-card">
+        <div class="icon">🌙</div>
+        <h3>TRIP</h3>
+        <p>2 Nights · 3 Days</p>
+      </div>
+
+      <div class="info-card">
+        <div class="icon">👥</div>
+        <h3>CREW</h3>
+        <p>8 People</p>
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- CREW -->
+
+  <section class="crew">
+
+    <div class="crew-inner">
+
+      <div class="section-label">
+        02 / OUR CREW
+      </div>
+
+      <h2 class="section-title">
+        Eight people,<br>
+        one trip.
+      </h2>
+
+      <p class="crew-text">
+        우리 회사 8명이 함께 떠나는<br>
+        2026 청도 워크샵.
+      </p>
+
+      <div class="crew-list">
+
+        <div class="crew-member">
+          <span>👤</span>
+          MEMBER 01
+        </div>
+
+        <div class="crew-member">
+          <span>👤</span>
+          MEMBER 02
+        </div>
+
+        <div class="crew-member">
+          <span>👤</span>
+          MEMBER 03
+        </div>
+
+        <div class="crew-member">
+          <span>👤</span>
+          MEMBER 04
+        </div>
+
+        <div class="crew-member">
+          <span>👤</span>
+          MEMBER 05
+        </div>
+
+        <div class="crew-member">
+          <span>👤</span>
+          MEMBER 06
+        </div>
+
+        <div class="crew-member">
+          <span>👤</span>
+          MEMBER 07
+        </div>
+
+        <div class="crew-member">
+          <span>👤</span>
+          MEMBER 08
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- ITINERARY -->
+
+  <section>
+
+    <div class="section-label">
+      03 / ITINERARY
+    </div>
+
+    <h2 class="section-title">
+      Let's go.
+    </h2>
+
+    <div class="timeline">
+
+      <div class="day">
+
+        <div class="day-title">
+          DAY 01 · 08.28 FRI
+        </div>
+
+        <div class="timeline-item">
+          <div class="time">NIGHT</div>
+          <div class="event">✈️ 청도로 출발</div>
+        </div>
+
+      </div>
+
+
+      <div class="day">
+
+        <div class="day-title">
+          DAY 02 · 08.29 SAT
+        </div>
+
+        <div class="timeline-item">
+          <div class="time">MORNING</div>
+          <div class="event">🌊 청도 여행 START</div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="time">AFTERNOON</div>
+          <div class="event">📍 관광 & 자유시간</div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="time">EVENING</div>
+          <div class="event">🍺 저녁 & 칭다오 맥주</div>
+        </div>
+
+      </div>
+
+
+      <div class="day">
+
+        <div class="day-title">
+          DAY 03 · 08.30 SUN
+        </div>
+
+        <div class="timeline-item">
+          <div class="time">DAY</div>
+          <div class="event">☀️ 마지막 청도 여행</div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="time">NIGHT</div>
+          <div class="event">✈️ 한국으로 귀국</div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- FOOD -->
+
+  <section class="food">
+
+    <div class="food-inner">
+
+      <div class="section-label">
+        04 / EAT & DRINK
+      </div>
+
+      <h2 class="section-title">
+        Good food.<br>
+        Good beer.
+      </h2>
+
+      <div class="food-box">
+
+        <div class="big-icon">🍺🥟</div>
+
+        <h3>Qingdao Food Trip</h3>
+
+        <p>
+          청도에서 뭐 먹을지는<br>
+          우리가 직접 채워나가요.
+        </p>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- CHECKLIST -->
+
+  <section>
+
+    <div class="section-label">
+      05 / CHECKLIST
+    </div>
+
+    <h2 class="section-title">
+      Don't forget<br>
+      these.
+    </h2>
+
+    <ul class="checklist">
+
+      <li>🛂 여권</li>
+      <li>📱 휴대폰 & 충전기</li>
+      <li>💳 여행에 필요한 결제수단</li>
+      <li>👕 편한 옷</li>
+      <li>👟 편한 신발</li>
+      <li>💊 개인적으로 필요한 물품</li>
+      <li>😎 즐길 마음</li>
+
+    </ul>
+
+  </section>
+
+
+  <!-- FOOTER -->
+
+  <footer>
+
+    <div class="footer-icon">
+      🌊🍺✈️
+    </div>
+
+    <h2>See you in Qingdao!</h2>
+
+    <p>
+      2026 FreshCart Company Workshop
+    </p>
+
+  </footer>
+
+</body>
+</html>
